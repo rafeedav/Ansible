@@ -1,6 +1,1 @@
-- name: setup
-  hosts: server3
-  tasks:
-    - name: task1
-      debug:
-        msg: "The ip address is {{ansible_host}}"
+
