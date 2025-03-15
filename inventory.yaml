@@ -1,0 +1,26 @@
+all:
+  hosts:
+    server1:
+      ansible_user: rafeeda
+      ansible_host: 172.16.150.242
+      ansible_become: yes
+      ansible_become_method: sudo
+      ansible_become_pass: asd123.
+    server2:
+      ansible_user: rafeeda
+      ansible_host: 172.16.150.245
+      ansible_become: yes
+      ansible_necome_method: sudo
+      ansible_become_pass: asd123.
+    server3:
+      ansible_user: rafeeda
+      ansible_host: 172.16.60.42
+      ansible_become: yes
+      ansible_necome_method: sudo
+      ansible_become_pass: asd123.
+    server4:
+      ansible_user: synnefo
+      ansible_host: 172.16.150.219
+      ansible_become: yes
+      ansible_necome_method: sudo
+      ansible_become_pass: asd123.
