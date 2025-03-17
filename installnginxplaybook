@@ -1,0 +1,22 @@
+---
+- name: Install and start NGINX
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install NGINX package
+      dnf:
+        name: nginx
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Install NGINX package (RedHat-based systems)
+      yum:
+        name: nginx
+        state: present
+      when: ansible_os_family == "RedHat"
+
+    - name: Ensure NGINX is started and enabled
+      service:
+        name: nginx
+        state: started
+        enabled: yes
