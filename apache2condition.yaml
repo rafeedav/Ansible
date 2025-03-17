@@ -10,7 +10,7 @@
     - ansible_os_family == 'Debian'
   - name: Enable and start apache2
     service:
-      name: nginx
+      name: apache2
       enabled: yes
       state: started
     when:
