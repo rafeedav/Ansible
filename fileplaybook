@@ -1,0 +1,9 @@
+---
+- name: Create rhc.txt file and set permission 500
+  hosts: all
+  tasks:
+    - name: Create an empty rhce file
+      ansible.builtin.file:
+        path: /home/rafeeda/rhce.txt
+        state: touch
+        mode: '0500'
