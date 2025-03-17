@@ -1,1 +1,8 @@
-
+---
+- name: Copy a file from local machine to remote server
+  hosts: all
+  tasks:
+    - name: Copy file to remote server
+      ansible.builtin.copy:
+        src: /home/synnefo/Downloads/muna.pem 
+        dest: /home/rafeeda/  
