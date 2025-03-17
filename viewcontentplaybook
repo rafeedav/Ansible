@@ -1,0 +1,23 @@
+---
+- name: Display content of /var/www/html/index.html on two servers
+  hosts:
+    - server1
+    - server2
+  become: no
+  tasks:
+    - name: Read content of /var/www/html/index.html
+      slurp:
+        path: /var/www/html/index.html
+      register: file_content
+      when: index_file.stat.exists
+
+    - name: Display content of /var/www/html/index.html on server1 or server2
+      debug:
+        msg: |
+          On {{ inventory_hostname }}, the content of /var/www/html/index.html is:
+          {{ file_content.content | b64decode }}
+      when: index_file.stat.exists
+    - name: Handle case where the file does not exist
+      debug:
+        msg: "On {{ inventory_hostname }}, the file /var/www/html/index.html does not exist."
+      when: not index_file.stat.exists
