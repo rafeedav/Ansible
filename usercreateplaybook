@@ -1,0 +1,13 @@
+---
+- name: Create a user on remote server
+  hosts: all
+  become: yes
+  tasks:
+    - name: Create a new user
+      ansible.builtin.user:
+        name: "gokul"
+        state: present
+        comment: "gokulam"
+        shell: /bin/bash
+        home: /home/gokul
+        create_home: yes
