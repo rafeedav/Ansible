@@ -1,0 +1,11 @@
+---
+- name: Example of Ansible playbook with variables
+  hosts: all
+  become: true
+
+  vars:
+    up: "uptime"
+
+  tasks:
+    - name: Get uptime
+      command: "{{ up }}"
