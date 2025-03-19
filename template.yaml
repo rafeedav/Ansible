@@ -1,0 +1,7 @@
+- name: Template
+  hosts: server2
+  tasks:
+    - name: Copy template file
+      template:
+        src: iop.j2
+        dest: /home/rafeeda/
