@@ -1,0 +1,7 @@
+- name: Copy file
+  hosts: server1
+  tasks:
+    - name: Copy file 
+      copy:
+        src: iop.j2
+        dest: /home/rafeeda/
