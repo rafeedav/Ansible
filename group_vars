@@ -1,5 +1,5 @@
 - name: hostvars and groupvars
-  hosts: server3
+  hosts: group3
   tasks:
   - name: Installing package
     ansible.builtin.apt:
