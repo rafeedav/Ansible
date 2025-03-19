@@ -7,7 +7,7 @@
       state: present
   - name: Enabling and starting
     ansible.builtin.service:
-      name: "{{abc}}"
+      name: "{{xyz}}"
       enabled: yes
       state: started
   - name : Copy files
