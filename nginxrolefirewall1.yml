@@ -1,0 +1,51 @@
+---
+# tasks file for nginxrolefirewall/
+- name: Install required package
+  dnf:
+    name: "{{ package }}"
+    state: present
+
+- name: Enable & start nginx service
+  service:
+    name: "{{ service }}"
+    enabled: yes
+    state: started
+
+- name: Copy file
+  copy:
+    src: filex
+    dest: /home/rafeeda
+
+- name: Allow HTTP and HTTPS through firewalld
+  ansible.posix.firewalld:
+    service: http
+    permanent: yes
+    state: enabled
+
+- name: Allow HTTPS through firewalld
+  ansible.posix.firewalld:
+    service: https
+    permanent: yes
+    state: enabled
+
+- name: Reload firewalld
+  ansible.builtin.systemd:
+    name: firewalld
+    state: reloaded
+
+- name: Restart nginx
+  ansible.builtin.service:
+    name: nginx
+    state: restarted
+
+- name: Deploy template settings
+  template:
+    src: index.html.j2
+    dest: "{{ path }}/index.html"
+  notify: Restart nginx
+
+- name: Restart service if defined
+  service:
+    name: "{{ service }}"
+    state: restarted
+  when: service is defined
