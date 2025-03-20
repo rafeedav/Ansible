@@ -1,0 +1,24 @@
+---
+# tasks file for nginxrole
+- name: Installing
+  dnf:
+    name: "{{package}}"
+    state: present
+- name: Enabling & starting
+  service:
+    name: "{{service}}"
+    enabled: yes
+    state: started
+- name: Copy file
+  copy:
+    src: newfile
+    dest: /home/rafeeda
+- name : Template settings
+  template:
+    src: index.html.j2
+    dest: "{{path}}/index.html"
+  notify: Restarted
+- name: Restarting
+  service:
+    name: "{{service}}"
+    state: restarted
