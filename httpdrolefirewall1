@@ -1,51 +1,34 @@
 ---
 # tasks file for httpdrolefirewall/
-- name: Install required package
+- name: installing
   dnf:
-    name: "{{ package }}"
+    name: "{{package}}"
     state: present
-
-- name: Enable & start httpd service
+- name: enabling & starting
   service:
-    name: "{{ service }}"
+    name: "{{service}}"
     enabled: yes
     state: started
-
-- name: Copy file
+- name: copy file
   copy:
     src: fileh
-    dest: /home/rafeeda
-
-- name: Allow HTTP and HTTPS through firewalld
-  ansible.posix.firewalld:
+    dest: /home/shaliga
+- name: configarating firewall to allow httpd
+  ansible.builtin.firewalld:
     service: http
-    permanent: yes
     state: enabled
-
-- name: Allow HTTPS through firewalld
-  ansible.posix.firewalld:
-    service: https
-    permanent: yes
-    state: enabled
-
-- name: Reload firewalld
-  ansible.builtin.systemd:
-    name: firewalld
-    state: reloaded
-
-- name: Restart nginx
+    permanent: true
+- name: restarting httpd service
   ansible.builtin.service:
     name: httpd
     state: restarted
-
-- name: Deploy template settings
+- name: template setting
   template:
     src: index.html.j2
-    dest: "{{ path }}/index.html"
-  notify: Restart httpd
-
-- name: Restart service if defined
+    dest: "{{path}}/index.html"
+  notify: restarted
+- name: restarting
   service:
-    name: "{{ service }}"
+    name: "{{service}}"
     state: restarted
   when: service is defined
